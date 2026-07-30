@@ -1,0 +1,14 @@
+primitive d_latch_udp(q, d, en);
+
+output q;
+reg q;
+input d, en;
+
+table
+// d  en : Qt : Qt+1
+   0   1 :  ? : 0;
+   1   1 :  ? : 1;
+   ?   0 :  ? : -;
+endtable
+
+endprimitive
