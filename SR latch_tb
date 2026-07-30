@@ -1,0 +1,27 @@
+`timescale 1ns/1ps
+
+module sr_latch_tb;
+
+reg s, r;
+wire q;
+
+sr_latch_udp uut(q, s, r);
+
+initial begin
+    $dumpfile("sr_latch.vcd");
+    $dumpvars(0, sr_latch_tb);
+
+    s = 0; r = 0; #10;   // Hold
+    s = 1; r = 0; #10;   // Set
+    s = 0; r = 0; #10;   // Hold
+    s = 0; r = 1; #10;   // Reset
+    s = 0; r = 0; #10;   // Hold
+    s = 1; r = 1; #10;   // Invalid
+
+    $finish;
+end
+
+initial
+    $monitor("Time=%0t S=%b R=%b Q=%b",$time,s,r,q);
+
+endmodule
