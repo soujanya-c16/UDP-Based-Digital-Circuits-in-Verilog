@@ -1,0 +1,30 @@
+`timescale 1ns/1ps
+
+module d_latch_tb;
+
+reg d, en;
+wire q;
+
+d_latch_udp uut(q, d, en);
+
+initial begin
+    $dumpfile("d_latch.vcd");
+    $dumpvars(0, d_latch_tb);
+
+    en = 1; d = 0; #10;
+    d = 1;          #10;
+
+    en = 0;         #10;
+    d = 0;          #10;
+    d = 1;          #10;
+
+    en = 1;         #10;
+    d = 0;          #10;
+
+    $finish;
+end
+
+initial
+    $monitor("Time=%0t EN=%b D=%b Q=%b",$time,en,d,q);
+
+endmodule
