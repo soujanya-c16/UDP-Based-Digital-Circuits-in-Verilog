@@ -1,0 +1,16 @@
+primitive sr_latch_udp(q, s, r);
+
+output q;
+reg q;
+input s, r;
+
+table
+// s  r : Qt : Qt+1
+   0  0 :  0 : 0;
+   0  0 :  1 : 1;
+   0  1 :  ? : 0;
+   1  0 :  ? : 1;
+   1  1 :  ? : x;
+endtable
+
+endprimitive
